@@ -1,21 +1,22 @@
 package com.pourkazemi.mahdi.myretrofit_quiz
 
 import okhttp3.OkHttpClient
-import okhttp3.Request
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
 object MyNetworkManager {
-    var client = OkHttpClient.Builder().addInterceptor { chain ->
-        val newRequest: Request = chain.request().newBuilder()
-            .addHeader("Authorization", "Bearer bkjcsbmahdipourkazemi")
+    val logging = HttpLoggingInterceptor().apply {
+        setLevel(HttpLoggingInterceptor.Level.BODY)
+    }
+    val mInterceptor=MyInterceptor()
+    var client = OkHttpClient.Builder().addInterceptor(mInterceptor)
+        .addInterceptor(logging)
             .build()
-        chain.proceed(newRequest)
-    }.build()
     private val retrofit = Retrofit.Builder()
+        .baseUrl("http://papp.ir/api/v1/")
         .client(client)
-        .baseUrl("http://papp.ir/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 

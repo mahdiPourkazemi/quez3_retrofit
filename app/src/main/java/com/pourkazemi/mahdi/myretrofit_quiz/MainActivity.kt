@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val mData=SignUpRequest("mahdi","pourkazemi","43265490467",
+        val mData=SignUpRequest("mahdi2","pourkazemi2","43265490467",
             listOf("movies","game"))
         val request_body=MyNetworkManager.myService.createAccount(mData)
 

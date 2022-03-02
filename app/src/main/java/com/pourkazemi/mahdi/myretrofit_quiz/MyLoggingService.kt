@@ -7,6 +7,6 @@ import retrofit2.http.POST
 
 interface MyLoggingService {
 
-        @POST()
+        @POST("users")
         fun createAccount(@Body request: SignUpRequest): Call<String>
 }
